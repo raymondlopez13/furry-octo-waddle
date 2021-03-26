@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         }
     }).then(data => res.json(data));
-})
+});
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -29,5 +29,25 @@ router.post('/', (req, res) => {
         res.json(data);
     })
 });
+router.put('/:id', (req, res) => {
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.id
+        }
+    }).then(data => {
+        if(!data){
+            res.json({message: 'no user with this ID!'});
+        }
+        res.json(data);
+    })
+});
+router.delete('/:id', (req,res) => {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(data => res.json(data));
+})
 
 module.exports = router;
