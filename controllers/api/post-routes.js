@@ -5,6 +5,16 @@ router.get('/', (req,res) => {
     Post.findAll({
         include: [
             {
+                model: Comment,
+                attributes: ['comment_text'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username']
+                    }
+                ]
+            },
+            {
                 model: User,
                 attributes: ['username']
             }
