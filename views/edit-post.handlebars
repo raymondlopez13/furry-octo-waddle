@@ -1,0 +1,18 @@
+<article class="text-center">
+  <h1>
+    Edit Post
+  </h1>
+  <form class="row flex-column align-content-center" id="edit-post-form">
+    <div class="row flex-column">
+        <label for="post-title" style="font-size: 1.5em;">Title:</label>
+        <input name="post-title" type="text" value="{{posts.title}}" class="form-control form-control-lg w-50 align-self-center" />
+        <label for="post-text" style="font-size: 1.5em;">Post text:</label>
+        <textarea name="post-text" type="text" class="form-control">{{posts.post_text}}</textarea> 
+    </div>
+    <button type="submit" class="btn btn-primary w-25 align-self-center my-2" style="font-size: 1.5em;">Save post</button>
+    <button type="button" class="btn btn-primary w-25 align-self-center" style="font-size: 1.5em;" id="delete-post">Delete post</button>
+  </form>
+</article>
+
+<script src='/javascript/edit-post.js'></script>
+<script src='/javascript/delete-post.js'></script>

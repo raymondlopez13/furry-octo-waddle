@@ -1,31 +1,15 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models/index');
+const sequelize = require('../config/connection');
+const { Post, User, Comment } = require('../models');
 
 router.get('/', (req,res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
     Post.findAll({
-        include: [
-            {
-                model: Comment,
-                attributes: ['comment_text'],
-                include: [
-                    {
-                        model: User,
-                        attributes: ['username']
-                    }
-                ]
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
-    }).then(data => res.json(data));
-});
-
-router.get('/:id', (req,res) => {
-    Post.findOne({
         where: {
-            id: req.params.id
+            user_id: req.session.user_id
         },
         include: [
             {
@@ -43,39 +27,39 @@ router.get('/:id', (req,res) => {
                 attributes: ['username']
             }
         ]
-    }).then(data => res.json(data));
+    }).then(data => {
+        const posts = data.map(post => post.get({ plain: true }));
+        res.render('dashboard', {posts, loggedIn: req.session.loggedIn});
+    });
 });
-
-router.post('/', (req,res) => {
-    Post.create({
-        title: req.body.title,
-        post_text: req.body.post_text,
-        user_id: req.session.user_id
-    }).then(data => res.json(data))
-    .catch(err => {
-        console.log(err);
-        res.status(400).json(err);
-    })
-});
-
-router.put('/:id', (req,res) => {
-    Post.update({
-        title: req.body.title,
-        post_text: req.body.post_text
-    },
-     {
+router.get('/edit/:id', (req,res) => {
+    Post.findOne({
         where: {
-            id: req.params.id
-        }
-    }).then(data => res.json(data));
-});
-
-router.delete('/:id', (req,res) => {
-    Post.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(data => res.json(data));
+            id: req.params.id,
+        },
+        include: [
+            {
+                model: Comment,
+                attributes: ['comment_text'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username']
+                    }
+                ]
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    }).then(data => {
+        const posts = data.get({ plain: true });
+        res.render('edit-post', { posts, loggedIn: req.session.loggedIn });
+      }).catch(err => {
+          console.log(err);
+          res.status(400).json(err);
+      })
 })
 
 module.exports = router;
