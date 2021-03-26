@@ -23,7 +23,10 @@ router.get('/', (req, res) => {
         ]
     }).then(data => {
         const posts = data.map(post => post.get({ plain: true }));
-        res.render('homepage', { posts });
+        res.render('homepage', {
+            posts,
+            loggedIn: req.session.loggedIn
+        });
     });
 });
 

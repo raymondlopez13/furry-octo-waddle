@@ -18,12 +18,15 @@
       <li class="nav-item">
         <a class="nav-link text-white" style="font-size: 1.5em;" href="#">Dashboard</a>
       </li>
+      {{#if loggedIn}}
       <li class="nav-item">
-        <a class="nav-link text-white" style="font-size: 1.5em;" href="#">Login</a>
+        <a class="nav-link text-white" style="font-size: 1.5em;" href="/logout">Logout</a>
       </li>
+      {{else}}
       <li class="nav-item">
-        <a class="nav-link text-white" style="font-size: 1.5em;" href="#">Logout</a>
+        <a class="nav-link text-white" style="font-size: 1.5em;" href="/login">Login</a>
       </li>
+      {{/if}}
     </ul>
     <h1 class="py-2 bg-white col-3 text-center">The Tech Blog</h1>
   </header>

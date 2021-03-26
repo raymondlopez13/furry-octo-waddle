@@ -31,9 +31,9 @@ router.post('/', (req, res) => {
             req.session.username = data.username;
             req.session.loggedIn = true;
     
-            res.json(dbUserData);
+            res.json(data);
           });
-    })
+    });
 });
 router.post('/login', (req, res) => {
     User.findOne({
