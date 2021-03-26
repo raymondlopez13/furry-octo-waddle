@@ -1,0 +1,26 @@
+<article class="card p-2">
+    <div class="card-body">
+        <div class="row bg-dark text-white justify-content-between">
+            <h1><a class="card-title text-white px-4">{{post.title}}</a></h1>
+            <h4 class="align-self-center pr-2">Posted by: {{post.user.username}}</h4>
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="row py-1">
+            <h5 class="px-5">{{post.post_text}}</h5>
+        </div>
+    </div>
+</article>
+
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+
+  <div>
+    <button type="submit">add comment</button>
+  </div>
+</form>
+{{/if}}
