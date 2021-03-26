@@ -49,15 +49,17 @@ router.get('/:id', (req,res) => {
 router.post('/', (req,res) => {
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        post_text: req.body.post_text,
         user_id: req.body.user_id
-    }).then(data => res.json(data));
+    }).then(data => res.json(data))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    })
 });
 
 router.put('/:id', (req,res) => {
-    Post.update({
-        title: req.body.title
-    },
+    Post.update(req.body,
      {
         where: {
             id: req.params.id

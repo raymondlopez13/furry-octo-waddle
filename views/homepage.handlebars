@@ -1,0 +1,17 @@
+
+{{#each posts as |post|}}
+<article class="card p-2">
+    <div class="card-body">
+        <div class="row bg-dark text-white justify-content-between">
+            <h1><a href="{{id}}" class="card-title text-white">{{title}}</a></h1>
+            <h4 class="align-self-center pr-2">Posted by: {{user.username}}</h4>
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="row py-1">
+            <h5>{{post_text}}</h5>
+        </div>
+    </div>
+</article>
+{{/each}}
