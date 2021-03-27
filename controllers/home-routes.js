@@ -27,7 +27,10 @@ router.get('/', (req, res) => {
             posts,
             loggedIn: req.session.loggedIn
         });
-    });
+    }).catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    })
 });
 
 router.get('/login', (req,res) => {
@@ -36,6 +39,39 @@ router.get('/login', (req,res) => {
         return;
     }
     res.render('login');
+});
+
+router.get('/:id', (req,res) => {
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [
+            {
+                model: Comment,
+                attributes: ['comment_text', 'created_at'],
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username']
+                    }
+                ]
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    }).then(data => {
+        const post = data.get({ plain: true });
+        res.render('single-post', {
+            post,
+            loggedIn: req.session.loggedIn
+        });
+    }).catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    })
 });
 
 module.exports = router;

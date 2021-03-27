@@ -6,7 +6,7 @@ router.get('/', (req,res) => {
         include: [
             {
                 model: Comment,
-                attributes: ['comment_text'],
+                attributes: ['comment_text', 'created_at'],
                 include: [
                     {
                         model: User,
@@ -30,7 +30,7 @@ router.get('/:id', (req,res) => {
         include: [
             {
                 model: Comment,
-                attributes: ['comment_text'],
+                attributes: ['comment_text', 'created_at'],
                 include: [
                     {
                         model: User,

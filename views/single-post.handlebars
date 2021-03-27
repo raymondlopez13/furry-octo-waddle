@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row bg-dark text-white justify-content-between">
             <h1><a class="card-title text-white px-4">{{post.title}}</a></h1>
-            <h4 class="align-self-center pr-2">Posted by: {{post.user.username}}</h4>
+            <h4 class="align-self-center pr-2">Posted by: {{post.user.username}} on {{format_date post.createdAt}}</h4>
         </div>
         <div class="row">
             
@@ -14,13 +14,22 @@
 </article>
 
 {{#if loggedIn}}
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
+<form class="my-3" id="add-comment">
+  <div class="form-group">
+    <h2 class='px-4'>Add comment:</h2>
+    <textarea name="comment-body" class='form-control w-50 mx-4' rows='6'></textarea>
   </div>
 
-  <div>
-    <button type="submit">add comment</button>
+  <div class='form-group'>
+    <button type="submit" class='btn btn-primary mx-4'>add comment</button>
   </div>
 </form>
 {{/if}}
+<h2 class="mx-4 my-3">Comments:</h2>
+{{#each post.comments as |comment|}}
+<div class="row mx-4">
+  <h3 class='mr-1'>{{comment.comment_text}}</h3>
+  <p class='muted' style="font-size: 1.5em;">-{{comment.user.username}}  {{format_date comment.created_at}}</p>
+</div>
+{{/each}}
+<script src="/javascript/comments.js"></script>
