@@ -1,7 +1,7 @@
 # CMS style blog!
-[LINK TO DEPLOYED APP:][https://morning-refuge-71605.herokuapp.com/]
+[[LINK TO DEPLOYED APP:][https://morning-refuge-71605.herokuapp.com/]]
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![photo of app](https://github.com/raymondlopez13/furry-octo-waddle/blob/main/assets/Tech%20Blog.png)]
+![photo of app](https://github.com/raymondlopez13/furry-octo-waddle/blob/main/assets/Tech%20Blog.png)
 
 ## Table of contents
 - [Description](#description)
